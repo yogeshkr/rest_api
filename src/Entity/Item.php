@@ -58,9 +58,9 @@ class Item
     private $itemCode;
     /**
      * @ORM\OneToMany(targetEntity=Property::class, mappedBy="item", cascade={"persist"}, orphanRemoval=true)
-     * @Groups({"property:read"})
+     * @Groups({"property:read", "items:read"})
      */
-    private $propertyName;
+    private $properties;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -92,12 +92,13 @@ class Item
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"items:read", "items:write"})
+     * @Groups({"items:read"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, columnDefinition="datetime default current_timestamp on update current_timestamp not null")
+     * @Groups({"items:read"})
      */
     private $updatedAt;
 
@@ -177,27 +178,27 @@ class Item
     /**
      * @return Collection<int, Property>
      */
-    public function getPropertyName(): Collection
+    public function getProperties(): Collection
     {
-        return $this->propertyName;
+        return $this->properties;
     }
 
-    public function addPropertyName(Property $propertyName): self
+    public function addProperties(Property $properties): self
     {
-        if (!$this->propertyName->contains($propertyName)) {
-            $this->propertyName[] = $propertyName;
-            $propertyName->setItemId($this);
+        if (!$this->properties->contains($properties)) {
+            $this->properties[] = $properties;
+            $properties->setItemId($this);
         }
 
         return $this;
     }
 
-    public function removePropertyName(Property $propertyName): self
+    public function removeProperties(Property $properties): self
     {
-        if ($this->propertyName->removeElement($propertyName)) {
+        if ($this->properties->removeElement($properties)) {
             // set the owning side to null (unless already changed)
-            if ($propertyName->getItemId() === $this) {
-                $propertyName->setItemId(null);
+            if ($properties->getItemId() === $this) {
+                $properties->setItemId(null);
             }
         }
 

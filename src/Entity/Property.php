@@ -34,10 +34,10 @@ class Property
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Item::class, inversedBy="propertyName")
+     * @ORM\ManyToOne(targetEntity=Item::class, inversedBy="properties")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank(message="Item cannot be empty")
-     * @Groups({"property:write", "items:read"})
+     * @Groups({"property:write"})
      */
     private $item;
 
