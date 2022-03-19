@@ -26,7 +26,6 @@
 ###< friendsofphp/php-cs-fixer ###
 
 /.idea
-/.project
 
 ###> symfony/webpack-encore-bundle ###
 # /public/build/
@@ -41,3 +40,7 @@ yarn-error.log
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
+
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###
